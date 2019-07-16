@@ -6,6 +6,6 @@
     <cover-view style="color: {{selected === index ? selectedColor : color}}">{{item.text}}</cover-view>
   </cover-view>
 </cover-view>
-<cover-view class="camera-wrap" bindtap="jumpToCameraPage">
+<cover-view class="camera-wrap {{isIpX ? 'bottom' : ''}}" bindtap="jumpToCameraPage">
   <cover-image src="../imgs/icon_camera.png" class="icon-camera"></cover-image>
 </cover-view>

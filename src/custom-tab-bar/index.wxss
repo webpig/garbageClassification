@@ -59,4 +59,8 @@
     background: #f4ea2a;
     z-index: 9999; 
   }
+
+  .bottom {
+    bottom: 80px
+  }
   

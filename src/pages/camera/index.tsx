@@ -45,8 +45,14 @@ export default class Index extends Component {
   render () {
     return (
       <View className='index'>
-        { !this.state.isCompletedQuery ? <Camera devicePosition='back' flash='off' className='camera' /> : null }
-        { !this.state.isCompletedQuery ? <CoverView onClick={this.takePhoto} className='btn' /> : null }
+        {
+          !this.state.isCompletedQuery ? 
+            <Camera devicePosition='back' flash='off' className='camera'>
+              <CoverView onClick={this.takePhoto} className='btn' />
+            </Camera>
+            :
+            null
+        }
         {
           this.state.isCompletedQuery ?
             <View className='mask'>
