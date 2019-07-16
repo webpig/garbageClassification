@@ -1,0 +1,48 @@
+{
+	"miniprogramRoot": "dist/",
+	"projectname": "myApp",
+	"description": "first taro app",
+	"appid": "wxb060341354abcac8",
+	"setting": {
+		"urlCheck": true,
+		"es6": false,
+		"postcss": false,
+		"minified": false,
+		"newFeature": true,
+		"autoAudits": false,
+		"checkInvalidKey": true
+	},
+	"compileType": "miniprogram",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"libVersion": "2.7.5",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": 0,
+					"name": "index",
+					"pathName": "pages/search/index",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}

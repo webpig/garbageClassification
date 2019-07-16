@@ -1,0 +1,85 @@
+.camera
+    width 100%
+    height 100vh
+.btn
+    position fixed
+    width 100rpx
+    height 100rpx
+    border-radius 100rpx
+    border 20rpx solid #eee
+    left 50%
+    bottom 100rpx
+    margin-left -70rpx
+    background #fff
+.mask
+    position fixed
+    width 100%
+    top 0
+    bottom 0
+    background rgba(0, 0, 0, .7)
+    z-index 999
+    display flex
+    align-items center
+    justify-content center
+    .modal
+        // position absolute
+        // left 50%
+        // top 50%
+        // transform translate(-50%, -50%)
+        border-radius 10rpx
+        background #fff
+        padding-top 30rpx
+        .modal-title
+            font-size 36rpx
+            color #000
+            font-weight bold
+            text-align center
+        .modal-content
+            display flex
+            align-items center
+            padding 30rpx
+        .img
+            width 200rpx
+            height 200rpx
+            margin-right 28rpx
+        .title
+            font-size 30rpx
+            font-weight bold
+            color #000
+            // margin-top 28rpx
+        .item
+            display flex
+            align-items center
+            margin-top 18rpx
+            font-size: 28rpx
+            color #000
+            .type
+                padding 8rpx 12rpx
+                background #eee
+                margin-left 12rpx
+                font-size 24rpx
+        .btn-row
+            display flex
+            border-top 1rpx solid #999
+            // position relative
+            // &::after
+            //     content: ''
+            //     width 1rpx
+            //     height 88rpx
+            //     background #999
+            //     position absolute
+            //     left 50%
+            //     top 0
+            .btn-item
+                flex: 1
+                text-align center 
+                height 88rpx
+                line-height 88rpx
+                font-size 30rpx
+                &.exit
+                    color #666
+                    border-right 1rpx solid #999
+                &.continue
+                    color #000
+
+
