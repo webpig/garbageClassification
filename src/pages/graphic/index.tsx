@@ -38,7 +38,7 @@ export default class Index extends Component {
   setImgHeight () {
     Taro
       .getImageInfo({
-        src: '../../imgs/graphic.jpeg',
+        src: 'https://tva1.sinaimg.cn/large/0060lm7Tly1g52p7mhyigj30m84blwm4.jpg',
       })
       .then(res => {
         this.setState({
@@ -63,8 +63,15 @@ export default class Index extends Component {
     return (
       <View className='index' style={`padding-bottom: ${this.state.isIpX ? 75 : 44}px`}>
         {/* <Image src='http://218.16.125.44/img/20180519/131711963478424405.png'></Image> */}
-        <Image src={require('../../imgs/graphic.jpeg')} className='graphic-img' style={`height: ${this.state.imgHeight}px`}></Image>
+        <Image src='https://tva1.sinaimg.cn/large/0060lm7Tly1g52p7mhyigj30m84blwm4.jpg' className='graphic-img' style={`height: ${this.state.imgHeight}px`} onClick={this.preview}></Image>
       </View>
     )
+  }
+
+  preview () {
+    Taro.previewImage({
+      current: 'https://tva1.sinaimg.cn/large/0060lm7Tly1g52p7mhyigj30m84blwm4.jpg',
+      urls: ['https://tva1.sinaimg.cn/large/0060lm7Tly1g52p7mhyigj30m84blwm4.jpg']
+    })
   }
 }

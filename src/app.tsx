@@ -25,7 +25,8 @@ class App extends Component {
       'pages/search/index',
       'pages/detail/index',
       'pages/camera/index',
-      'pages/graphic/index'
+      'pages/graphic/index',
+      'pages/qrCode/index'
     ],
     window: {
       backgroundTextStyle: 'light',

@@ -1,15 +1,40 @@
 .item
-    padding 30rpx 0
+    // padding 30rpx 0
     // border-bottom 1px solid #eee
+    .title 
+        font-weight bold
+        font-size 28rpx
+        color #000
+        position relative
+        margin 30rpx 0
+        background #eee
+        padding 12rpx 30rpx
+        // padding-left 24rpx
+        // &::after
+        //     content: ''
+        //     position absolute
+        //     left 0
+        //     top 50%
+        //     transform translateY(-50%)
+        //     height 30rpx
+        //     width 8rpx
+        //     background #000
+        &::after 
+            content: ''
+            position absolute
+            right 30rpx
+            top 50%
+            width 18rpx
+            height 18rpx
+            border-top 3rpx solid #999
+            border-right 3rpx solid #999
+            transform translateY(-50%) rotate(45deg) 
+            transition .3s transform
+    .active::after
+        transform translateY(-75%) rotate(135deg)
     .item-header
         display flex
         align-items center
-        margin-bottom 30rpx
-    .title 
-        font-size 32rpx
-        color #000
-        font-weight bold
-        margin-bottom 12rpx
     .recyclable-img
         width 150rpx
         height 150rpx
@@ -17,15 +42,28 @@
     .desc
         font-size 26rpx
         color #000
+    .tip-item
+        font-size 28rpx
+        color #000
+        margin-bottom 12rpx
+        position relative
+        padding-left 24rpx
     .garbage-list
         .garbage-item
             // padding-left 12rpx
-            position relative
-            height 60rpx
-            line-height 60rpx
-            text-align center
-            font-size 30rpx
+            // position relative
+            // height 60rpx
+            // line-height 60rpx
+            // text-align center
+            // font-size 30rpx
+            // color #000
+            font-size 28rpx
             color #000
+            background #eee
+            display inline-block
+            margin-right 18rpx
+            padding 12rpx 24rpx
+            margin-bottom 18rpx
             // &::after 
             //     content: ''
             //     position absolute
@@ -36,10 +74,10 @@
             //     border-top 2rpx solid #999
             //     border-right 2rpx solid #999
             //     transform translateY(-50%) rotate(45deg) 
-        View:nth-of-type(odd)
-            background #eee
-        View:nth-of-type(even)
-            background #d9d9d9
+        // View:nth-of-type(odd)
+        //     background #eee
+        // View:nth-of-type(even)
+        //     background #d9d9d9
     .kind-item
         font-size: 26rpx
         color #000

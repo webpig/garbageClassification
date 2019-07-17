@@ -19,7 +19,6 @@ Component({
   attached() {
     wx.getSystemInfo({
       success: res => {
-        console.log(res)
         this.setData({
           isIpX: res.model.includes('iPhone X')
         })

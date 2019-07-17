@@ -47,14 +47,14 @@ export default class Index extends Component {
       <View className='index'>
         {
           !this.state.isCompletedQuery ? 
-            <Camera devicePosition='back' flash='off' className='camera'>
+            <Camera devicePosition='back' flash='off' className='camera' onError={this.checkIfAuthorizeCamera}>
               <CoverView onClick={this.takePhoto} className='btn' />
             </Camera>
             :
             null
         }
         {
-          this.state.isCompletedQuery ?
+          this.state.isCompletedQuery && this.state.list.length > 0 ?
             <View className='mask'>
               <View className='modal'>
                 <View className='modal-title'>识别结果</View>
@@ -99,50 +99,83 @@ export default class Index extends Component {
 
   takePhoto () {
     const ctx = Taro.createCameraContext()
+
     ctx.takePhoto({
       quality: 'high',
       success: (res) => {
-        console.log(res)
         Taro.showLoading({
           title: '正在识别中...',
           mask: true
         })
+
         this.setState({
           src: res.tempImagePath
         })
+        
         // this.setImgSize(res.tempImagePath)
-        if (res.tempImagePath) {
-          wx.getFileSystemManager().readFile({
-            filePath: res.tempImagePath, //选择图片返回的相对路径
-            encoding: 'base64', //编码格式
-            success: (res: any) => { //成功的回调
-              Taro.request({
-                url: 'https://www.toolnb.com/ext/lajifenlei.json',
-                method: 'POST',
-                header: {
-                  'content-type': 'application/x-www-form-urlencoded' // 默认值
-                },
-                data: {
-                  token: '519a6560c8815be7e839166becc9f687',
-                  body: res.data,
-                  suffix: 'jpg',
-                  type: 'file'
-                },
-                success: res => {
-                  console.log(res)
-                  Taro.hideLoading()
-                  let arr = ['1', '2', '3', '4']
-                  this.setState({
-                    list: res.data.data.filter((item: any) => arr.includes(item.type)),
-                    isCompletedQuery: true
-                  })
-                }
-              })
-            }
-          });
-        }
+        res.tempImagePath && this.filePathToBase64(res.tempImagePath)
       }
     })
+  }
+
+  filePathToBase64 (tempImagePath: string) {
+    wx
+      .getFileSystemManager()
+      .readFile({
+        filePath: tempImagePath, //选择图片返回的相对路径
+        encoding: 'base64', //编码格式
+        success: (res: any) => { //成功的回调
+          this.requestAPI(res.data)
+        }
+      });
+  }
+
+  requestAPI (base64: string) {
+    Taro.request({
+      url: 'https://www.toolnb.com/ext/lajifenlei.json',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' // 默认值
+      },
+      data: {
+        token: '519a6560c8815be7e839166becc9f687',
+        body: base64,
+        suffix: 'jpg',
+        type: 'file'
+      },
+      success: res => {
+        Taro.hideLoading()
+        let arr = ['1', '2', '3', '4']
+        this.setState({
+          list: res.data.data.filter((item: any) => arr.includes(item.type)),
+          isCompletedQuery: true
+        }, () => {
+          this.promptNoResults()
+        })
+      }
+    })
+  }
+
+  promptNoResults () {
+    if (this.state.list.length === 0) {
+      Taro.showModal({
+        title: '提示',
+        content: '未识别到相应结果，请选择重新拍照或者去手动搜索',
+        confirmText: '重新拍照',
+        cancelText: '去搜索',
+        success: res => {
+          if (res.cancel) {
+            Taro.navigateTo({
+              url: '/pages/search/index'
+            })
+          }
+
+          this.setState({
+            isCompletedQuery: false
+          })
+        }
+      })
+    }
   }
 
   setImgSize (src: string) {
@@ -166,6 +199,38 @@ export default class Index extends Component {
   continue () {
     this.setState({
       isCompletedQuery: false
+    })
+  }
+
+  checkIfAuthorizeCamera () {
+    Taro.getSetting({
+      success: (res: any) => {
+        if (!res.authSetting['scope.camera']) {
+          this.setState({
+            isCompletedQuery: true
+          })
+          Taro.showModal({
+            title: '提示',
+            content: '您未授权使用摄像头，请授权后再使用',
+            confirmText: '去授权',
+            cancelText: '不使用',
+            success: res => {
+              if (res.confirm) {
+                Taro.openSetting({
+                  complete: () => {
+                    this.checkIfAuthorizeCamera()
+                    this.setState({
+                      isCompletedQuery: false
+                    })
+                  }
+                })
+              } else if (res.cancel) {
+                Taro.navigateBack()
+              }
+            }
+          })
+        }
+      }
     })
   }
 
