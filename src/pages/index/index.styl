@@ -1,17 +1,39 @@
 .strong
     font-weight bold
 .index
-    padding 0 30rpx
-    padding-bottom 140rpx
-    // display flex
-    // flex-direction column
-    // align-items center
-    // justify-content center
-    // height 100vh
-    // background linear-gradient(green, 10%, white)
-    .slogan
-        font-size 60rpx;
-        font-weight bold;
+    // padding 28rpx 30rpx 140rpx
+    .header
+        // background url('http://pic.sc.chinaz.com/files/pic/pic9/201610/fpic7918.jpg')
+        padding 28rpx 30rpx 48rpx
+        margin-bottom 48rpx
+    .type-container
+        display flex
+        justify-content space-between
+        flex-wrap wrap
+        padding 30rpx 77rpx
+        .type-item
+            width 260rpx
+            height 260rpx
+            border-radius 10rpx
+            margin-bottom 48rpx
+        // display flex
+        // align-items center
+        // height 160rpx
+        // border-radius 10rpx
+        // background #eee
+        // background #36bf84
+        // background linear-gradient(to right, #66FF99, #36bf84)
+        // padding 0 30rpx
+        // margin 30rpx
+        // font-size 24rpx
+        // color #000
+        // .img-wrap
+        //     margin-right 30rpx
+        //     width 100rpx
+        //     height 100rpx
+        // Image
+        //     width 100rpx
+        //     height 100rpx
     .input-box 
         display flex
         align-items center
@@ -22,19 +44,13 @@
         background #f8f8f8
         border-radius 80rpx
         border 1rpx solid #eee 
-        margin 28rpx 0                  
         .placeholder  
             margin-left 12rpx
             font-size 28rpx
             color #666
     .banner
-        // width 508rpx
         width 100%
-        // height 300rpx
         border-radius 10rpx
-        // display block
-        // margin 0 auto
-        // margin-bottom 18rpx
     .img 
         width 546rpx
         height 546rpx
@@ -52,22 +68,22 @@
             height 60rpx
             line-height 60rpx
             text-align center
-            font-size 26rpx
+            font-size 28rpx
             color #000
             &.recyclable
-                background blue
+                color #0075C2
             &.harmful
-                background red
+                color #e80016
             &.wet
-                background green
+                color #009944
             &.dry
-                background black
+                color #F7AC00
             &.active
-                font-size 30rpx
-                font-weight bold
+                // font-size 28rpx
+                // font-weight bold
                 // border-bottom 1rpx solid #000
             &.hover-bg
-                background #eee
+                // background #eee
     .title
         position fixed
         right 30rpx
@@ -83,15 +99,27 @@
         border-radius 60rpx
         // margin-top 48rpx
         // border-bottom 1rpx solid #999
-    .icon-notice
+    .fixed
         position fixed
         right 30rpx
-        bottom 200rpx
-        width 40rpx
-        height 40rpx
-        margin-right 12rpx
-        background #ccc
-        border-radius 40rpx
-        border 12rpx solid #ccc
+        bottom 180rpx
+        Image
+            display block
+            width 40rpx
+            height 40rpx
+            background #ccc
+            border-radius 40rpx
+            border 12rpx solid #ccc
+        .btn-wrap
+            position relative
+            margin-bottom 24rpx
+            .share-btn
+                position absolute
+                top 0
+                right 0
+                bottom 0
+                left 0
+                opacity 0
+            
 
                 

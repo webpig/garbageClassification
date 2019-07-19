@@ -35,35 +35,70 @@
     .item-header
         display flex
         align-items center
+        padding 30rpx 0
     .recyclable-img
         width 150rpx
         height 150rpx
         margin-right 18rpx
+        border-radius 10rpx
     .desc
         font-size 26rpx
-        color #000
+        // color #000
+        color #2761C9
+        &.recyclable
+            color #2761C9
+        &.harmful
+            color #DD1717
+        &.wet
+            color #16937B
+        &.dry
+            color #FF8B00
+    .tip-header
+        font-size 26rpx
+        font-weight bold
+        padding 12rpx 0
+        padding-left 24rpx
+        margin-bottom 30rpx
+        color #fff
+        background #2761C9
+        &.recyclable
+            background #2761C9
+        &.harmful
+            background #DD1717
+        &.wet
+            background #16937B
+        &.dry
+            background #FF8B00
     .tip-item
         font-size 28rpx
         color #000
         margin-bottom 12rpx
         position relative
         padding-left 24rpx
+        &.recyclable
+            color #2761C9
+        &.harmful
+            color #DD1717
+        &.wet
+            color #16937B
+        &.dry
+            color #FF8B00
     .garbage-list
+        margin-top 30rpx
         .garbage-item
-            // padding-left 12rpx
-            // position relative
-            // height 60rpx
-            // line-height 60rpx
-            // text-align center
-            // font-size 30rpx
-            // color #000
+            // width 33%
             font-size 28rpx
             color #000
-            background #eee
-            display inline-block
-            margin-right 18rpx
-            padding 12rpx 24rpx
-            margin-bottom 18rpx
+            // display inline-block
+            // text-align center
+            // margin-right 18rpx
+            height 60rpx
+            line-height 60rpx
+            padding-left 24rpx
+            // border-right 1rpx solid #999
+            // border-bottom 1rpx solid #999
+            // &.border-top
+            //     border-top 1rpx solid #999
             // &::after 
             //     content: ''
             //     position absolute
@@ -74,10 +109,10 @@
             //     border-top 2rpx solid #999
             //     border-right 2rpx solid #999
             //     transform translateY(-50%) rotate(45deg) 
-        // View:nth-of-type(odd)
-        //     background #eee
-        // View:nth-of-type(even)
-        //     background #d9d9d9
+        View:nth-of-type(odd)
+            background #eee
+        View:nth-of-type(even)
+            background #d9d9d9
     .kind-item
         font-size: 26rpx
         color #000

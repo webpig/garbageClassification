@@ -26,6 +26,7 @@ class App extends Component {
       'pages/detail/index',
       'pages/camera/index',
       'pages/graphic/index',
+      'pages/classification/index',
       'pages/qrCode/index'
     ],
     window: {

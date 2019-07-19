@@ -4,14 +4,18 @@ import './index.styl'
 
 interface GarbageTypeItemInfo {
     logo: string,
+    classification: string,
     desc: string,
     tip: string[],
     list: string[]
 }
 
 type Props = {
-  data: GarbageTypeItemInfo
+  data: GarbageTypeItemInfo,
+  id: string
 }
+
+const TYPES = ['recyclable', 'harmful', 'wet', 'dry']
 
 export default class GarbageTypeItem extends Component<Props, {}> {
 
@@ -27,10 +31,9 @@ export default class GarbageTypeItem extends Component<Props, {}> {
   }
 
   state = {
-    isShowTip: false,
-    isShowIntroduction: false,
-    isShowGarbageList: false,
-    isShowQrCode: false
+    isShowTip: true,
+    isShowIntroduction: true,
+    isShowGarbageList: true,
   }
 
   componentWillMount () { }
@@ -44,39 +47,54 @@ export default class GarbageTypeItem extends Component<Props, {}> {
   componentDidHide () { }
 
   render () {
+    const {
+      logo,
+      desc,
+      classification,
+      tip,
+      list
+    } = this.props.data || {
+      logo: '',
+      desc: '',
+      classification: '',
+      tip: '',
+      list: ''
+    }
+
     return (
-      <View className='item'>
-        <View className={`${this.state.isShowIntroduction ? 'active title' : 'title'}`} onClick={this.showIntroduction}>类型简介</View> 
+      <View className='item' id={this.props.id}>
+        {/* <View className={`${this.state.isShowIntroduction ? 'active title' : 'title'}`} onClick={this.showIntroduction}>类型简介</View>  */}
         {
           this.state.isShowIntroduction ?
             <View className='item-header'>
               <View className='recyclable-img'>
-                <Image src={this.props.data.logo} className='recyclable-img' />
+                <Image src={logo} className='recyclable-img' />
               </View>
-              <View className='desc'>{this.props.data.desc}</View>
+              <View className={`desc ${classification}`}>{desc}</View>
             </View>
             :
             null
         }
-        <View className={`${this.state.isShowTip ? 'active title': 'title'}`} onClick={this.showTip}>投放要求</View>
+        <View className={`tip-header ${classification}`}>投放要求</View>
+        {/* <View className={`${this.state.isShowTip ? 'active title': 'title'}`} onClick={this.showTip}>投放要求</View> */}
         {
           this.state.isShowTip ?
             <View className=''>
             {
-              this.props.data.tip.map((item) => <View className='tip-item' key={item}>{item}</View>)
+              tip.map((item) => <View className={`tip-item ${classification}`} key={item}>{item}</View>)
             }
             </View>
             :
             null
         }
-        <View className={`${this.state.isShowGarbageList ? 'active title': 'title'}`} onClick={this.showGarbageList}>生活常见</View>
+        {/* <View className={`${this.state.isShowGarbageList ? 'active title': 'title'}`} onClick={this.showGarbageList}>生活常见</View> */}
         {
           this.state.isShowGarbageList ?
             <View className='garbage-list'>
             {
-              this.props.data.list.map((item) => {
+              list.map((item, index) => {
                 return (
-                  <View key={item} className='garbage-item'>{item}</View>
+                  <View key={item} className={`${index <= 2 ? 'border-top garbage-item': 'garbage-item'}`}>{item}</View>
                 )
               })
             }
