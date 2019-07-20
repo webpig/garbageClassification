@@ -40,6 +40,7 @@ export default class Index extends Component {
           <View className='input-box' onClick={this.jumpToSearchPage}>
             <Icon type='search' size='16' className='icon-search'/>
             <Text className='placeholder'>请输入垃圾名称</Text>
+            <Image src='../../imgs/icon_camera_search.png' className='icon-camera' onClick={this.jumpToCameraPage}></Image>
           </View>
         </View>
         {/* <Image src='https://s2.ax1x.com/2019/07/18/ZXViCV.jpg' className='banner' mode='widthFix' /> */}
@@ -89,6 +90,13 @@ export default class Index extends Component {
   jumpToClassificationPage (classification: string) {
     Taro.navigateTo({
       url: `/pages/classification/index?classification=${classification}`
+    })
+  }
+
+  jumpToCameraPage (e: any) {
+    e.stopPropagation()
+    Taro.navigateTo({
+      url: '/pages/camera/index'
     })
   }
 

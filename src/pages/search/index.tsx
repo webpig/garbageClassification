@@ -35,7 +35,8 @@ export default class Index extends Component {
     garbageName: '',
     isLoading: false,
     list: [] as garbageInfo[],
-    historyRecord: [] as string[]
+    historyRecord: [] as string[],
+    hotRecord: ['小龙虾', '西瓜皮', '啤酒瓶', '塑料袋', '卫生纸', '避孕套', '烂水果', '大闸蟹', '眼镜', '鱼', '鼠标垫', '剩饭', '头发']
   }
 
   componentWillMount () {
@@ -76,15 +77,38 @@ export default class Index extends Component {
                 :
                 null
             }
+            { 
+              !this.state.garbageName ?
+                <Image src='../../imgs/icon_camera_search.png' className='icon-camera' onClick={this.jumpToCameraPage}></Image>
+                :
+                null
+            }
           </View>
           {/* {
             <View className='cancel-btn'>取消</View>
           } */}
         </View>
         {
+          !this.state.garbageName && this.state.hotRecord.length > 0 ? 
+            <View className='history-header'>
+              <Text>热门搜索</Text>
+              {/* <Image src={require('../../imgs/icon_clear_history.png')} className='icon-clear-history' onClick={this.clearHistoryRecord} /> */}
+            </View>
+            :
+            null
+        }
+        <View className='history-list'>
+          {
+            !this.state.garbageName ?
+              this.state.hotRecord.map((item) => <View className='history-item' key={item} onClick={this.clickHistoryItem.bind(this, item)}>{item}</View>)
+              :
+              null
+          }
+        </View>
+        {
           !this.state.garbageName && this.state.historyRecord.length > 0 ? 
             <View className='history-header'>
-              <Text>搜索历史</Text>
+              <Text>历史搜索</Text>
               <Image src={require('../../imgs/icon_clear_history.png')} className='icon-clear-history' onClick={this.clearHistoryRecord} />
             </View>
             :
@@ -115,6 +139,12 @@ export default class Index extends Component {
         {/* {!this.state.garbageName ? <Image src='https://cdn.pixabay.com/photo/2016/04/20/15/36/recycling-1341372_1280.png' className='recycle' /> : null} */}
       </View>
     )
+  }
+
+  jumpToCameraPage () {
+    Taro.navigateTo({
+      url: '/pages/camera/index'
+    })
   }
 
   inputGarbageName (e: any) {

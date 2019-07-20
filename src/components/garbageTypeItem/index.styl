@@ -1,6 +1,9 @@
+$recyclable-color = #2761C9
+$harmful-color = #DD1717
+$wet-color = #16937B
+$dry-color = #FF8B00
+
 .item
-    // padding 30rpx 0
-    // border-bottom 1px solid #eee
     .title 
         font-weight bold
         font-size 28rpx
@@ -9,16 +12,6 @@
         margin 30rpx 0
         background #eee
         padding 12rpx 30rpx
-        // padding-left 24rpx
-        // &::after
-        //     content: ''
-        //     position absolute
-        //     left 0
-        //     top 50%
-        //     transform translateY(-50%)
-        //     height 30rpx
-        //     width 8rpx
-        //     background #000
         &::after 
             content: ''
             position absolute
@@ -43,16 +36,14 @@
         border-radius 10rpx
     .desc
         font-size 26rpx
-        // color #000
-        color #2761C9
         &.recyclable
-            color #2761C9
+            color $recyclable-color
         &.harmful
-            color #DD1717
+            color $harmful-color
         &.wet
-            color #16937B
+            color $wet-color
         &.dry
-            color #FF8B00
+            color $dry-color
     .tip-header
         font-size 26rpx
         font-weight bold
@@ -60,15 +51,14 @@
         padding-left 24rpx
         margin-bottom 30rpx
         color #fff
-        background #2761C9
         &.recyclable
-            background #2761C9
+            background $recyclable-color
         &.harmful
-            background #DD1717
+            background $harmful-color
         &.wet
-            background #16937B
+            background $wet-color
         &.dry
-            background #FF8B00
+            background $dry-color
     .tip-item
         font-size 28rpx
         color #000
@@ -76,13 +66,13 @@
         position relative
         padding-left 24rpx
         &.recyclable
-            color #2761C9
+            color $recyclable-color
         &.harmful
-            color #DD1717
+            color $harmful-color
         &.wet
-            color #16937B
+            color $wet-color
         &.dry
-            color #FF8B00
+            color $dry-color
     .garbage-list
         margin-top 30rpx
         .garbage-item
