@@ -2,10 +2,13 @@
     font-weight bold
 .index
     // padding 28rpx 30rpx 140rpx
+    width 100%
+    height 100vh
+    background #eee
     .header
         // background url('http://pic.sc.chinaz.com/files/pic/pic9/201610/fpic7918.jpg')
-        padding 28rpx 30rpx 48rpx
-        margin-bottom 48rpx
+        padding 28rpx 30rpx 28rpx
+        margin-bottom 68rpx
     .type-container
         display flex
         justify-content space-between
@@ -16,24 +19,14 @@
             height 260rpx
             border-radius 10rpx
             margin-bottom 48rpx
-        // display flex
-        // align-items center
-        // height 160rpx
-        // border-radius 10rpx
-        // background #eee
-        // background #36bf84
-        // background linear-gradient(to right, #66FF99, #36bf84)
-        // padding 0 30rpx
-        // margin 30rpx
-        // font-size 24rpx
-        // color #000
-        // .img-wrap
-        //     margin-right 30rpx
-        //     width 100rpx
-        //     height 100rpx
-        // Image
-        //     width 100rpx
-        //     height 100rpx
+            &.recyclable
+                background #0075C2
+            &.harmful
+                background #e80016
+            &.wet
+                background #009944
+            &.dry
+                background #F7AC00
     .input-box 
         display flex
         align-items center
@@ -41,7 +34,7 @@
         height 80rpx
         box-sizing border-box
         padding 0 30rpx
-        background #f8f8f8
+        background #fff
         border-radius 80rpx
         border 1rpx solid #eee 
         .placeholder  
@@ -49,9 +42,6 @@
             font-size 28rpx
             color #666
         .icon-camera
-            // position absolute
-            // right 30rpx
-            // top 50%
             width 50rpx
             height 50rpx
             margin-left auto

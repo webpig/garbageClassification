@@ -5,7 +5,7 @@
     right: 0;
     height: 96px;
     /* background: white; */
-    background: #f8f8f8;
+    background: #fff;
     display: flex;
     padding: 0 120px;
     justify-content: space-between;

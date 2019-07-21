@@ -46,16 +46,16 @@ export default class Index extends Component {
         {/* <Image src='https://s2.ax1x.com/2019/07/18/ZXViCV.jpg' className='banner' mode='widthFix' /> */}
         <View className='type-container'>
           <View onClick={this.jumpToClassificationPage.bind(this, 'recyclable')}>
-            <Image src='https://s2.ax1x.com/2019/07/18/ZjcNfH.png' className='type-item'></Image>
+            <Image src='https://s2.ax1x.com/2019/07/18/ZjcNfH.png' className='type-item recyclable'></Image>
           </View>
           <View onClick={this.jumpToClassificationPage.bind(this, 'harmful')}>
-            <Image src='https://s2.ax1x.com/2019/07/18/Zjctte.png' className='type-item'></Image>
+            <Image src='https://s2.ax1x.com/2019/07/18/Zjctte.png' className='type-item harmful'></Image>
           </View>
           <View onClick={this.jumpToClassificationPage.bind(this, 'wet')}>
-            <Image src='https://s2.ax1x.com/2019/07/18/Zjcapd.png' className='type-item'></Image>
+            <Image src='https://s2.ax1x.com/2019/07/18/Zjcapd.png' className='type-item wet'></Image>
           </View>
           <View onClick={this.jumpToClassificationPage.bind(this, 'dry')}>
-            <Image src='https://s2.ax1x.com/2019/07/18/Zjcd1A.png' className='type-item'></Image>
+            <Image src='https://s2.ax1x.com/2019/07/18/Zjcd1A.png' className='type-item dry'></Image>
           </View>
         </View>
         <View className='fixed'>
