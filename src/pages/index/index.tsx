@@ -60,8 +60,8 @@ export default class Index extends Component {
         </View>
         <View className='fixed'>
           <View className='btn-wrap'>
-            <Image src={require('../../imgs/icon_share.png')} className='icon-share' />
-            <Button openType='share' className='share-btn'></Button>
+            <Image src={require('../../imgs/icon_money.png')} className='icon-share' onClick={this.previewAppreciateCode} />
+            {/* <Button openType='share' className='share-btn'></Button> */}
           </View>
           <Image src={require('../../imgs/icon_notice.png')} className='icon-notice' onClick={this.jumpToQrCodePage}></Image>
         </View>
@@ -84,6 +84,19 @@ export default class Index extends Component {
   jumpToQrCodePage () {
     Taro.navigateTo({
       url: '/pages/qrCode/index'
+    })
+  }
+
+  jumpToAppreciatePage () {
+    Taro.navigateTo({
+      url: '/pages/appreciate/index'
+    })
+  }
+
+  previewAppreciateCode () {
+    Taro.previewImage({
+      urls: ['http://tva1.sinaimg.cn/large/0060lm7Tly1g57jkjiuy5j30u00u0t9l.jpg'],
+      current: 'http://tva1.sinaimg.cn/large/0060lm7Tly1g57jkjiuy5j30u00u0t9l.jpg'
     })
   }
 
