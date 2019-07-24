@@ -60,8 +60,9 @@ export default class Index extends Component {
         </View>
         <View className='fixed'>
           <View className='btn-wrap'>
-            <Image src={require('../../imgs/icon_money.png')} className='icon-share' onClick={this.previewAppreciateCode} />
-            {/* <Button openType='share' className='share-btn'></Button> */}
+            {/* <Image src={require('../../imgs/icon_money.png')} className='icon-share' onClick={this.previewAppreciateCode} /> */}
+            <Image src={require('../../imgs/icon_share.png')} className='icon-share' />
+            <Button openType='share' className='share-btn'></Button>
           </View>
           <Image src={require('../../imgs/icon_notice.png')} className='icon-notice' onClick={this.jumpToQrCodePage}></Image>
         </View>
