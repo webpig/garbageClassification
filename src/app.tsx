@@ -36,14 +36,21 @@ class App extends Component {
       navigationBarTextStyle: 'black'
     },
     tabBar: {
-      custom: true,
+      // custom: true,
+      // borderStyle: 'white',
+      // backgroundColor: '#f8f8f8',
       color: '#000',
-      selectedColor: '#1afa29',
+      selectedColor: '#1789E5',
       list: [{
         pagePath: 'pages/index/index',
         text: '首页',
         iconPath: './imgs/icon_home.png',
         selectedIconPath: './imgs/icon_home_HL.png',
+      }, {
+        pagePath: 'pages/classification/index',
+        text: '分类',
+        iconPath: './imgs/icon_classification.png',
+        selectedIconPath: './imgs/icon_classification_HL.png',
       }, {
         pagePath: 'pages/graphic/index',
         text: '图文',

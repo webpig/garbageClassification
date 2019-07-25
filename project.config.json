@@ -15,7 +15,7 @@
 	"compileType": "miniprogram",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
-	"libVersion": "2.7.0",
+	"libVersion": "2.4.3",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -38,7 +38,7 @@
 				{
 					"id": 0,
 					"name": "index",
-					"pathName": "pages/classification/index",
+					"pathName": "pages/camera/index",
 					"query": "",
 					"scene": null
 				}

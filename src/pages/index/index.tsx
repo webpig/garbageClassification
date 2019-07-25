@@ -12,23 +12,58 @@ export default class Index extends Component {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
-    navigationBarTitleText: '首页'
+    navigationBarTitleText: '首页',
+    navigationStyle: 'custom'
   }
 
   state = {
-    currTabName: 'recyclable'
+    currTabName: 'recyclable',
+    statusBarHeight: 0,
+    navBarHeight: 0,
+    screenWidth: 0,
+    menuButtonInfo: {} as {
+      height: number,
+      width: number,
+      top: number,
+      left: number,
+      right: number,
+      bottom: number
+    }
   }
 
-  componentWillMount () { }
+  componentWillMount () {
+    const menuButtonInfo = Taro.getMenuButtonBoundingClientRect()
+
+    Taro.getSystemInfo({
+      success: ({screenWidth}) => {
+        this.setState({
+          screenWidth,
+          menuButtonInfo
+        })
+      }
+    })
+    // this.setState({
+    //   menuButtonInfo
+    // })
+    // Taro.getSystemInfo({
+    //   success: ({statusBarHeight, system}) => {
+    //     this.setState({
+    //       statusBarHeight,
+    //       navBarHeight: system.indexOf('iOS') > -1 ? 44 : 48,
+    //       menuButtonInfo
+    //     })
+    //   }
+    // })
+  }
 
   componentDidMount () { }
 
   componentWillUnmount () { }
 
   componentDidShow () { 
-    this.$scope.getTabBar().setData({
-      selected: 0 // 当前页面对应的 index
-    })
+    // this.$scope.getTabBar().setData({
+    //   selected: 0 // 当前页面对应的 index
+    // })
   }
 
   componentDidHide () { }
@@ -37,14 +72,15 @@ export default class Index extends Component {
     return (
       <View className='index'>
         <View className='header'>
+          <Image src='http://tva1.sinaimg.cn/large/0060lm7Tly1g5c92rzcluj30u00u00x9.jpg' className='type-item recyclable'></Image>
           <View className='input-box' onClick={this.jumpToSearchPage}>
-            <Icon type='search' size='16' className='icon-search'/>
+            <Icon type='search' size='16' color='#999' className='icon-search'/>
             <Text className='placeholder'>请输入垃圾名称</Text>
             <Image src='../../imgs/icon_camera_search.png' className='icon-camera' onClick={this.jumpToCameraPage}></Image>
           </View>
         </View>
         {/* <Image src='https://s2.ax1x.com/2019/07/18/ZXViCV.jpg' className='banner' mode='widthFix' /> */}
-        <View className='type-container'>
+        {/* <View className='type-container'>
           <View onClick={this.jumpToClassificationPage.bind(this, 'recyclable')}>
             <Image src='https://s2.ax1x.com/2019/07/18/ZjcNfH.png' className='type-item recyclable'></Image>
           </View>
@@ -57,14 +93,18 @@ export default class Index extends Component {
           <View onClick={this.jumpToClassificationPage.bind(this, 'dry')}>
             <Image src='https://s2.ax1x.com/2019/07/18/Zjcd1A.png' className='type-item dry'></Image>
           </View>
-        </View>
-        <View className='fixed'>
-          <View className='btn-wrap'>
-            {/* <Image src={require('../../imgs/icon_money.png')} className='icon-share' onClick={this.previewAppreciateCode} /> */}
-            <Image src={require('../../imgs/icon_share.png')} className='icon-share' />
-            <Button openType='share' className='share-btn'></Button>
+        </View> */}
+        <View className='nav-bar' style={`top:${this.state.menuButtonInfo.top}px;left:${this.state.screenWidth - this.state.menuButtonInfo.right}px`}>
+          <View className='btn-wrap' style={`height:${this.state.menuButtonInfo.height}px;width:${this.state.menuButtonInfo.width}px`}>
+            <View className='Image-wrap'>
+              {/* <Image src={require('../../imgs/icon_money.png')} className='icon-share' onClick={this.previewAppreciateCode} /> */}
+              <Image src={require('../../imgs/icon_share.png')} className='icon-share' />
+              <Button openType='share' className='share-btn'></Button>
+            </View>
+            <View className='Image-wrap'>
+              <Image src={require('../../imgs/icon_notice.png')} className='icon-notice' onClick={this.jumpToQrCodePage}></Image>
+            </View>
           </View>
-          <Image src={require('../../imgs/icon_notice.png')} className='icon-notice' onClick={this.jumpToQrCodePage}></Image>
         </View>
       </View>
     )

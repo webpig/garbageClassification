@@ -52,16 +52,17 @@ export default class Index extends Component {
   componentWillUnmount () { }
 
   componentDidShow () {
-    this.$scope.getTabBar().setData({
-      selected: 1 // 当前页面对应的 index
-    })
+    // this.$scope.getTabBar().setData({
+    //   selected: 1 // 当前页面对应的 index
+    // })
   }
 
   componentDidHide () { }
 
   render () {
     return (
-      <View className='index' style={`padding-bottom: ${this.state.isIpX ? 75 : 44}px`}>
+      // <View className='index' style={`padding-bottom: ${this.state.isIpX ? 75 : 44}px`}>
+      <View className='index'>
         {/* <Image src='http://218.16.125.44/img/20180519/131711963478424405.png'></Image> */}
         <Image src='https://tva1.sinaimg.cn/large/0060lm7Tly1g52p7mhyigj30m84blwm4.jpg' className='graphic-img' style={`height: ${this.state.imgHeight}px`} onClick={this.preview}></Image>
       </View>

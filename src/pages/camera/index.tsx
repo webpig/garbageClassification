@@ -1,5 +1,5 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, CoverView, Text, Image, Camera, Button } from '@tarojs/components'
+import { View, CoverView, CoverImage, Image, Camera, Button } from '@tarojs/components'
 import './index.styl'
 
 interface garbageInfo {
@@ -21,7 +21,8 @@ export default class Index extends Component {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
-    navigationBarTitleText: '拍照识别'
+    navigationBarTitleText: '拍照识别',
+    // navigationStyle: 'custom'
   }
 
   state = {
@@ -29,7 +30,8 @@ export default class Index extends Component {
     isCompletedQuery: false,
     imgHeight: 0,
     imgWidth: 0,
-    list: [] as garbageInfo[]
+    list: [] as garbageInfo[],
+    devicePositionIsBack: true
   }
 
   componentWillMount () { }
@@ -47,8 +49,12 @@ export default class Index extends Component {
       <View className='index'>
         {
           !this.state.isCompletedQuery ? 
-            <Camera devicePosition='back' flash='off' className='camera' onError={this.checkIfAuthorizeCamera}>
-              <CoverView onClick={this.takePhoto} className='btn' />
+            <Camera devicePosition={this.state.devicePositionIsBack ? 'back' : 'front'} flash='off' className='camera' onError={this.checkIfAuthorizeCamera}>
+              <CoverView className='btn-wrap'>
+                <CoverImage onClick={this.chooseImage} src='../../imgs/icon_album.png' className='icon-back'></CoverImage>
+                <CoverView onClick={this.takePhoto} className='btn' />
+                <CoverImage src='../../imgs/icon_change.png' className='icon-change' onClick={this.changeDevicePosition}></CoverImage>
+              </CoverView>
             </Camera>
             :
             null
@@ -97,25 +103,51 @@ export default class Index extends Component {
     )
   }
 
+  back () {
+    Taro.navigateBack()
+  }
+
+  chooseImage () {
+    Taro.chooseImage({
+      count: 1,
+      sourceType: ['album'],
+      success: res => {
+        this.prepareRequest(res.tempFilePaths[0])
+      }
+    })
+  }
+
+  changeDevicePosition () {
+    this.setState({
+      devicePositionIsBack: !this.state.devicePositionIsBack
+    })
+  }
+
   takePhoto () {
     const ctx = Taro.createCameraContext()
 
     ctx.takePhoto({
       quality: 'high',
       success: (res) => {
-        Taro.showLoading({
-          title: '正在识别中...',
-          mask: true
-        })
-
-        this.setState({
-          src: res.tempImagePath
-        })
-        
-        // this.setImgSize(res.tempImagePath)
-        res.tempImagePath && this.filePathToBase64(res.tempImagePath)
+        this.prepareRequest(res.tempImagePath)
       }
     })
+  }
+
+  prepareRequest (tempImagePath: string) {
+    if (tempImagePath) {
+      Taro.showLoading({
+        title: '正在识别中...',
+        mask: true
+      })
+
+      this.setState({
+        src: tempImagePath
+      })
+      
+      // this.setImgSize(res.tempImagePath)
+      this.filePathToBase64(tempImagePath)
+    }
   }
 
   filePathToBase64 (tempImagePath: string) {
@@ -145,9 +177,19 @@ export default class Index extends Component {
       },
       success: res => {
         Taro.hideLoading()
-        let arr = ['1', '2', '3', '4']
+
+        const garbageTypes = ['1', '2', '3', '4']
+        let result = res.data.data.filter((item: any) => garbageTypes.includes(item.type))
+        let arr = [] as any[]
+        result.forEach((resultItem: any) => {
+          if (arr.some((item: any) => resultItem.title.split('-')[0] === item.title.split('-')[0])) {
+            return
+          }
+          arr.push(resultItem)
+        }) 
+        
         this.setState({
-          list: res.data.data.filter((item: any) => arr.includes(item.type)),
+          list: arr,
           isCompletedQuery: true
         }, () => {
           this.promptNoResults()

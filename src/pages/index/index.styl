@@ -4,11 +4,22 @@
     // padding 28rpx 30rpx 140rpx
     width 100%
     height 100vh
-    background #eee
+    background #fff
     .header
         // background url('http://pic.sc.chinaz.com/files/pic/pic9/201610/fpic7918.jpg')
-        padding 28rpx 30rpx 28rpx
-        margin-bottom 68rpx
+        // padding 28rpx 30rpx 28rpx
+        // margin-bottom 68rpx
+        position absolute
+        top 30%
+        left 66rpx
+        right 66rpx
+        text-align center
+        // transform translateY(-50%)
+        .type-item
+            width 260rpx
+            height 260rpx
+            border-radius 10rpx
+            margin-bottom 48rpx
     .type-container
         display flex
         justify-content space-between
@@ -28,19 +39,23 @@
             &.dry
                 background #F7AC00
     .input-box 
+        // position absolute
+        // top 50%
+        // left 30rpx
+        // right 30rpx
         display flex
         align-items center
-        width 100%
-        height 80rpx
+        // width 100%
+        height 88rpx
         box-sizing border-box
         padding 0 30rpx
-        background #fff
+        background #eee
         border-radius 80rpx
         border 1rpx solid #eee 
         .placeholder  
             margin-left 12rpx
             font-size 28rpx
-            color #666
+            color #999
         .icon-camera
             width 50rpx
             height 50rpx
@@ -96,27 +111,42 @@
         border-radius 60rpx
         // margin-top 48rpx
         // border-bottom 1rpx solid #999
-    .fixed
+    .nav-bar
         position fixed
-        right 30rpx
-        bottom 180rpx
-        Image
-            display block
-            width 40rpx
-            height 40rpx
-            background #ccc
-            border-radius 40rpx
-            border 12rpx solid #ccc
+        // display flex
+        // align-items center
         .btn-wrap
-            position relative
-            margin-bottom 24rpx
-            .share-btn
+            display flex
+            // width 174px
+            // height 64px
+            border 1px solid #eee
+            border-radius 100px
+            background #fff
+            &::after
+                content: ''
+                height 40rpx
+                width 1rpx
+                background #eee
                 position absolute
-                top 0
-                right 0
-                bottom 0
-                left 0
-                opacity 0
+                left 50%
+                top 50%
+                transform translate(-50%, -50%) 
+            .Image-wrap
+                width 50%
+                display flex
+                align-items center
+                justify-content center
+                position relative
+                .share-btn
+                    position absolute
+                    top 0
+                    right 0
+                    bottom 0
+                    left 0
+                    opacity 0
+                Image
+                    width 40rpx
+                    height 40rpx
             
 
                 
