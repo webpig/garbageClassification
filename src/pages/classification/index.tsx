@@ -1,6 +1,11 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Swiper, SwiperItem, ScrollView } from '@tarojs/components'
-import './index.styl'
+console.log(process.env.TARO_ENV)
+if (process.env.TARO_ENV === 'alipay') {
+  require('./alipay.styl')
+} else if (process.env.TARO_ENV === 'weapp') {
+  require('./index.styl')
+}
 import GarbageTypeItem from '../../components/garbageTypeItem'
 
 const recyclableItem = {
@@ -80,7 +85,7 @@ export default class Index extends Component {
   componentWillUnmount () { }
 
   componentDidShow () { 
-    this.getComponentHeight()
+    process.env.TARO_ENV === 'weapp' && this.getComponentHeight()
   }
 
   componentDidHide () { }
@@ -94,25 +99,54 @@ export default class Index extends Component {
           <View className={this.state.current === 2 ? 'tab-item active wet' : 'tab-item'} onClick={() => this.changeTab(2)} hoverClass='hover-bg'>厨余(湿)垃圾</View>
           <View className={this.state.current === 3 ? 'tab-item active dry' : 'tab-item'} onClick={() => this.changeTab(3)} hoverClass='hover-bg'>其他(干)垃圾</View>
         </View>
-        <Swiper
-          className='swiper'
-          style={`height: ${this.state[attrArr[this.state.current]]}px`}
-          current={this.state.current}
-          onChange={(e) => this.changeTab(e.detail.current)}
-          >
-          <SwiperItem>
-            <GarbageTypeItem data={recyclableItem} id='recyclable'></GarbageTypeItem>
-          </SwiperItem>
-          <SwiperItem>
-            <GarbageTypeItem data={harmfulItem} id='harmful'></GarbageTypeItem>
-          </SwiperItem>
-          <SwiperItem>
-            <GarbageTypeItem data={wetItem} id='wet'></GarbageTypeItem>
-          </SwiperItem>
-          <SwiperItem>
-            <GarbageTypeItem data={dryItem} id='dry'></GarbageTypeItem>
-          </SwiperItem>
-        </Swiper>
+        {
+          process.env.TARO_ENV === 'weapp' &&
+            <Swiper
+              className='swiper'
+              style={`height: ${this.state[attrArr[this.state.current]]}px`}
+              current={this.state.current}
+              onChange={(e) => this.changeTab(e.detail.current)}
+              >
+              <SwiperItem className='swiper-item'>
+                <GarbageTypeItem data={recyclableItem} id='recyclable'></GarbageTypeItem>
+              </SwiperItem>
+              <SwiperItem className='swiper-item'>
+                <GarbageTypeItem data={harmfulItem} id='harmful'></GarbageTypeItem>
+              </SwiperItem>
+              <SwiperItem className='swiper-item'>
+                <GarbageTypeItem data={wetItem} id='wet'></GarbageTypeItem>
+              </SwiperItem>
+              <SwiperItem className='swiper-item'>
+                <GarbageTypeItem data={dryItem} id='dry'></GarbageTypeItem>
+              </SwiperItem>
+            </Swiper>
+        }
+        {/* {
+          process.env.TARO_ENV === 'alipay' &&
+            <View>
+            {
+              this.state.current === 0 ?
+                <GarbageTypeItem data={recyclableItem} id='recyclable'></GarbageTypeItem>
+                :
+                this.state.current === 1 ?
+                  <GarbageTypeItem data={harmfulItem} id='harmful'></GarbageTypeItem>
+                  :
+                  this.state.current === 2 ?
+                  <GarbageTypeItem data={wetItem} id='wet'></GarbageTypeItem>
+                  :
+                  <GarbageTypeItem data={dryItem} id='dry'></GarbageTypeItem>
+            }
+            </View>
+        } */}
+        {
+          process.env.TARO_ENV === 'alipay' && 
+            <View>
+              { this.state.current === 0 ? <GarbageTypeItem data={recyclableItem} id='recyclable'></GarbageTypeItem> : null}
+              { this.state.current === 1 ? <GarbageTypeItem data={harmfulItem} id='recyclable'></GarbageTypeItem> : null}
+              { this.state.current === 2 ? <GarbageTypeItem data={wetItem} id='recyclable'></GarbageTypeItem> : null}
+              { this.state.current === 3 ? <GarbageTypeItem data={dryItem} id='recyclable'></GarbageTypeItem> : null}
+            </View>
+        }
       </View>
     )
   }

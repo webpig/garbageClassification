@@ -32,16 +32,7 @@ export default class Index extends Component {
   }
 
   componentWillMount () {
-    const menuButtonInfo = Taro.getMenuButtonBoundingClientRect()
-
-    Taro.getSystemInfo({
-      success: ({screenWidth}) => {
-        this.setState({
-          screenWidth,
-          menuButtonInfo
-        })
-      }
-    })
+    process.env.TARO_ENV === 'weapp' && this.getScreenWidthAndMenuButtonInfo()
     // this.setState({
     //   menuButtonInfo
     // })
@@ -76,7 +67,7 @@ export default class Index extends Component {
           <View className='input-box' onClick={this.jumpToSearchPage}>
             <Icon type='search' size='16' color='#999' className='icon-search'/>
             <Text className='placeholder'>请输入垃圾名称</Text>
-            <Image src='../../imgs/icon_camera_search.png' className='icon-camera' onClick={this.jumpToCameraPage}></Image>
+            <Image src='../../imgs/icon_camera_search.png' className='icon-camera' onClick={this.clickCameraIcon}></Image>
           </View>
         </View>
         {/* <Image src='https://s2.ax1x.com/2019/07/18/ZXViCV.jpg' className='banner' mode='widthFix' /> */}
@@ -94,20 +85,41 @@ export default class Index extends Component {
             <Image src='https://s2.ax1x.com/2019/07/18/Zjcd1A.png' className='type-item dry'></Image>
           </View>
         </View> */}
-        <View className='nav-bar' style={`top:${this.state.menuButtonInfo.top}px;left:${this.state.screenWidth - this.state.menuButtonInfo.right}px`}>
-          <View className='btn-wrap' style={`height:${this.state.menuButtonInfo.height}px;width:${this.state.menuButtonInfo.width}px`}>
-            <View className='Image-wrap'>
-              {/* <Image src={require('../../imgs/icon_money.png')} className='icon-share' onClick={this.previewAppreciateCode} /> */}
-              <Image src={require('../../imgs/icon_share.png')} className='icon-share' />
-              <Button openType='share' className='share-btn'></Button>
+        {
+          process.env.TARO_ENV === 'weapp' &&
+            <View className='nav-bar' style={`top:${this.state.menuButtonInfo.top}px;left:${this.state.screenWidth - this.state.menuButtonInfo.right}px`}>
+              <View className='btn-wrap' style={`height:${this.state.menuButtonInfo.height}px;width:${this.state.menuButtonInfo.width}px`}>
+                <View className='Image-wrap'>
+                  {/* <Image src={require('../../imgs/icon_money.png')} className='icon-share' onClick={this.previewAppreciateCode} /> */}
+                  <Image src={require('../../imgs/icon_share.png')} className='icon-share' />
+                  <Button openType='share' className='share-btn'></Button>
+                </View>
+                <View className='Image-wrap'>
+                  <Image src={require('../../imgs/icon_notice.png')} className='icon-notice' onClick={this.jumpToQrCodePage}></Image>
+                </View>
+              </View>
             </View>
-            <View className='Image-wrap'>
-              <Image src={require('../../imgs/icon_notice.png')} className='icon-notice' onClick={this.jumpToQrCodePage}></Image>
-            </View>
-          </View>
+        }
+        <View className='bottom'>
+          <Image src={require('../../imgs/icon_contact_gray.png')} className='icon-contact' onClick={this.jumpToQrCodePage}></Image>
+          有问题？<Text className='feed-back'>点我反馈</Text>
+          <Button openType='contact'></Button>
         </View>
       </View>
     )
+  }
+
+  getScreenWidthAndMenuButtonInfo () {
+    const menuButtonInfo = Taro.getMenuButtonBoundingClientRect()
+
+    Taro.getSystemInfo({
+      success: ({screenWidth}) => {
+        this.setState({
+          screenWidth,
+          menuButtonInfo
+        })
+      }
+    })
   }
 
   jumpToSearchPage () {
@@ -116,21 +128,9 @@ export default class Index extends Component {
     })
   }
 
-  changeTab (tabName: string) {
-    this.setState({
-      currTabName: tabName
-    })
-  }
-
   jumpToQrCodePage () {
     Taro.navigateTo({
       url: '/pages/qrCode/index'
-    })
-  }
-
-  jumpToAppreciatePage () {
-    Taro.navigateTo({
-      url: '/pages/appreciate/index'
     })
   }
 
@@ -147,10 +147,25 @@ export default class Index extends Component {
     })
   }
 
-  jumpToCameraPage (e: any) {
+  clickCameraIcon (e: any) {
     e.stopPropagation()
+    process.env.TARO_ENV === 'weapp' && this.jumpToCameraPage()
+    // process.env.TARO_ENV === 'alipay' && this.chooseImage()
+  }
+
+  jumpToCameraPage () {
     Taro.navigateTo({
       url: '/pages/camera/index'
+    })
+  }
+
+  chooseImage () {
+    Taro.chooseImage({
+      count: 1,
+      sourceType: ['camera'],
+      success: res => {
+        console.log(res)
+      }
     })
   }
 

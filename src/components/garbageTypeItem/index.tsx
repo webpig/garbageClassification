@@ -1,6 +1,11 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Image, Text } from '@tarojs/components'
-import './index.styl'
+
+if (process.env.TARO_ENV === 'alipay') {
+  require('./alipay.styl')
+} else if (process.env.TARO_ENV === 'weapp') {
+  require('./index.styl')
+}
 
 interface GarbageTypeItemInfo {
     logo: string,
@@ -92,9 +97,9 @@ export default class GarbageTypeItem extends Component<Props, {}> {
           this.state.isShowGarbageList ?
             <View className='garbage-list'>
             {
-              list.map((item, index) => {
+              list.map((item) => {
                 return (
-                  <View key={item} className={`${index <= 2 ? 'border-top garbage-item': 'garbage-item'}`}>{item}</View>
+                  <View key={item} className='garbage-item'>{item}</View>
                 )
               })
             }

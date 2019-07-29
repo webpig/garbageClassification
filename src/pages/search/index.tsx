@@ -66,20 +66,22 @@ export default class Index extends Component {
               confirm-type='search'
               onConfirm={this.search}
             />
+            {/* 支付宝Icon不能绑定事件 */}
             {
               this.state.garbageName ? 
-                <Icon
-                  type='clear'
-                  size='18'
-                  className='icon-clear'
-                  onClick={this.clearGarbageName}
-                />
+                <View onClick={this.clearGarbageName}>
+                  <Icon
+                    type='clear'
+                    size='18'
+                    className='icon-clear'
+                  />
+                </View>
                 :
                 null
             }
             { 
               !this.state.garbageName ?
-                <Image src='../../imgs/icon_camera_search.png' className='icon-camera' onClick={this.jumpToCameraPage}></Image>
+                <Image src='../../imgs/icon_camera_search.png' className='icon-camera' onClick={this.clickCameraIcon}></Image>
                 :
                 null
             }
@@ -141,10 +143,19 @@ export default class Index extends Component {
     )
   }
 
+  clickCameraIcon () {
+    process.env.TARO_ENV === 'weapp' && this.jumpToCameraPage()
+    process.env.TARO_ENV === 'alipay' && this.chooseImage()
+  }
+
   jumpToCameraPage () {
     Taro.navigateTo({
       url: '/pages/camera/index'
     })
+  }
+
+  chooseImage () {
+
   }
 
   inputGarbageName (e: any) {
@@ -227,7 +238,6 @@ export default class Index extends Component {
         key: 'search_history',
       })
       .then(res => {
-        console.log(res.data)
         res.data && this.setState({
           historyRecord: res.data
         })
