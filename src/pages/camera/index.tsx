@@ -11,6 +11,8 @@ interface garbageInfo {
 
 const TYPE = ['可回收垃圾', '有害垃圾', '厨余(湿)垃圾', '其他(干)垃圾']
 
+let times = 0
+
 export default class Index extends Component {
 
   /**
@@ -151,6 +153,7 @@ export default class Index extends Component {
   }
 
   filePathToBase64 (tempImagePath: string) {
+    console.log(tempImagePath)
     wx
       .getFileSystemManager()
       .readFile({
@@ -178,24 +181,66 @@ export default class Index extends Component {
       success: res => {
         Taro.hideLoading()
 
-        const garbageTypes = ['1', '2', '3', '4']
-        let result = res.data.data.filter((item: any) => garbageTypes.includes(item.type))
-        let arr = [] as any[]
-        result.forEach((resultItem: any) => {
-          if (arr.some((item: any) => resultItem.title.split('-')[0] === item.title.split('-')[0])) {
-            return
-          }
-          arr.push(resultItem)
-        }) 
+        if (res.statusCode === 200) {
+          const garbageTypes = ['1', '2', '3', '4']
+          let result = res.data.data.filter((item: any) => garbageTypes.includes(item.type))
+          let arr = [] as any[]
+          result.forEach((resultItem: any) => {
+            if (arr.some((item: any) => resultItem.title.split('-')[0] === item.title.split('-')[0])) {
+              return
+            }
+            arr.push(resultItem)
+          }) 
+          
+          this.setState({
+            list: arr,
+            isCompletedQuery: true
+          }, () => {
+            this.promptNoResults()
+          })
+        } else {
+          this.promptErrorMsg()
+        }
         
-        this.setState({
-          list: arr,
-          isCompletedQuery: true
-        }, () => {
-          this.promptNoResults()
-        })
+      },
+      fail: () => {
+        Taro.hideLoading()
+        this.promptErrorMsg()
       }
     })
+  }
+
+  promptErrorMsg () {
+    if (times < 3) {
+      times++
+
+      this.setState({
+        isCompletedQuery: false
+      })
+  
+      Taro.showToast({
+        title: '处理失败，请重试',
+        icon: 'none'
+      })
+    } else {
+      Taro.showModal({
+        title: '提示',
+        content: '拍照识别好像出了点故障，您可以选择手动搜索',
+        confirmText: '重新拍照',
+        cancelText: '去搜索',
+        success: res => {
+          if (res.cancel) {
+            Taro.navigateTo({
+              url: '/pages/search/index'
+            })
+          }
+
+          this.setState({
+            isCompletedQuery: false
+          })
+        }
+      })
+    }
   }
 
   promptNoResults () {
