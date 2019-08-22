@@ -57,12 +57,51 @@ export default class Index extends Component {
                 <CoverView onClick={this.takePhoto} className='btn' />
                 <CoverImage src='../../imgs/icon_change.png' className='icon-change' onClick={this.changeDevicePosition}></CoverImage>
               </CoverView>
+              {
+                this.state.list.length > 0 ?
+                  <CoverView className='mask'>
+                    <CoverView className='modal'>
+                      <CoverView className='modal-title'>识别结果</CoverView>
+                      <CoverView className='modal-content'>
+                        {
+                          this.state.src ? 
+                            <CoverImage
+                              src={this.state.src}
+                              className='img'
+                              // style={`height: ${this.state.imgHeight}px; width: ${this.state.imgWidth}px`}
+                            />
+                            :
+                            null
+                        }
+                        <CoverView>
+                          <CoverView className='title'>图中包含的垃圾有：</CoverView>
+                            {
+                              this.state.list.map((item) => {
+                                return (
+                                  <CoverView className='item' key={item.title}>
+                                    <CoverView>{item.title.split('-')[0]}</CoverView>
+                                    <CoverView className='type'>{TYPE[parseInt(item.type) - 1]}</CoverView>
+                                  </CoverView>
+                                )
+                              })
+                            }
+                        </CoverView>
+                      </CoverView>   
+                      <CoverView className='btn-row'>
+                        <CoverView className='btn-item exit' onClick={this.exit}>退出</CoverView>
+                        <CoverView className='btn-item continue' onClick={this.continue}>继续</CoverView>
+                      </CoverView>
+                    </CoverView>
+                  </CoverView>
+                  :
+                  null
+              }
             </Camera>
             :
             null
         }
-        {
-          this.state.isCompletedQuery && this.state.list.length > 0 ?
+        {/* {
+          this.state.list.length > 0 ?
             <View className='mask'>
               <View className='modal'>
                 <View className='modal-title'>识别结果</View>
@@ -99,7 +138,7 @@ export default class Index extends Component {
             </View>
             :
             null
-        }
+        } */}
         {/* <Image mode="widthFix" src={this.state.src}></Image> */}
       </View>
     )
@@ -153,7 +192,6 @@ export default class Index extends Component {
   }
 
   filePathToBase64 (tempImagePath: string) {
-    console.log(tempImagePath)
     wx
       .getFileSystemManager()
       .readFile({
@@ -194,7 +232,6 @@ export default class Index extends Component {
           
           this.setState({
             list: arr,
-            isCompletedQuery: true
           }, () => {
             this.promptNoResults()
           })
@@ -213,10 +250,6 @@ export default class Index extends Component {
   promptErrorMsg () {
     if (times < 3) {
       times++
-
-      this.setState({
-        isCompletedQuery: false
-      })
   
       Taro.showToast({
         title: '处理失败，请重试',
@@ -234,10 +267,6 @@ export default class Index extends Component {
               url: '/pages/search/index'
             })
           }
-
-          this.setState({
-            isCompletedQuery: false
-          })
         }
       })
     }
@@ -256,10 +285,6 @@ export default class Index extends Component {
               url: '/pages/search/index'
             })
           }
-
-          this.setState({
-            isCompletedQuery: false
-          })
         }
       })
     }
@@ -271,7 +296,6 @@ export default class Index extends Component {
         src,
       })
       .then(res => {
-        console.log(res)
         this.setState({
           imgHeight: res.height,
           imgWidth: res.width
@@ -285,7 +309,7 @@ export default class Index extends Component {
 
   continue () {
     this.setState({
-      isCompletedQuery: false
+      list: []
     })
   }
 

@@ -18,6 +18,12 @@ interface garbageInfo {
   tip: string
 }
 
+interface hotRecordInfo {
+  name: string,
+  type: number,
+  index: number
+}
+
 export default class Index extends Component {
 
   /**
@@ -36,11 +42,12 @@ export default class Index extends Component {
     isLoading: false,
     list: [] as garbageInfo[],
     historyRecord: [] as string[],
-    hotRecord: ['小龙虾', '西瓜皮', '啤酒瓶', '塑料袋', '卫生纸', '避孕套', '烂水果', '大闸蟹', '眼镜', '鱼', '鼠标垫', '剩饭', '头发']
+    hotRecord: [] as hotRecordInfo[],
   }
 
   componentWillMount () {
     this.getHistoryRecord()
+    this.getHotSearch()
   }
 
   componentDidMount () { }
@@ -102,7 +109,7 @@ export default class Index extends Component {
         <View className='history-list'>
           {
             !this.state.garbageName ?
-              this.state.hotRecord.map((item) => <View className='history-item' key={item} onClick={this.clickHistoryItem.bind(this, item)}>{item}</View>)
+              this.state.hotRecord.map((item) => <View className='history-item' key={item.name} onClick={this.clickHistoryItem.bind(this, item.name)}>{item.name}</View>)
               :
               null
           }
@@ -270,6 +277,21 @@ export default class Index extends Component {
     this.search({
       detail: {
         value: item
+      }
+    })
+  }
+
+  getHotSearch () {
+    Taro.request({
+      url: 'https://api.tianapi.com/txapi/hotlajifenlei/',
+      data: {
+        key: '633cadcfeccda00555fdc80463b609ca'
+      },
+      success: res => {
+        console.log(res);
+        this.setState({
+          hotRecord: res.data.newslist.slice(0, 18)
+        })
       }
     })
   }

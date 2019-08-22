@@ -10,12 +10,19 @@
 		"minified": false,
 		"newFeature": true,
 		"autoAudits": false,
-		"checkInvalidKey": true
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
 	"compileType": "miniprogram",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
-	"libVersion": "2.4.3",
+	"libVersion": "2.8.0",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -37,8 +44,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "index",
-					"pathName": "pages/classification/index",
+					"name": "pages/camera/index",
+					"pathName": "pages/camera/index",
 					"query": "",
 					"scene": null
 				}
