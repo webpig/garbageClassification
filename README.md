@@ -7,7 +7,7 @@
 ![微信小程序码](https://i.screenshot.net/kkq4zsp)
 
 ## taro文档
-![链接](https://taro-docs.jd.com/taro/docs/README.html)
+[文档地址](https://taro-docs.jd.com/taro/docs/README.html)
 
 ## 项目运行
 
