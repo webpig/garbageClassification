@@ -28,6 +28,7 @@ class App extends Component {
       'pages/graphic/index',
       'pages/classification/index',
       'pages/qrCode/index',
+      'pages/test/index'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -51,6 +52,11 @@ class App extends Component {
         text: '分类',
         iconPath: './imgs/icon_classification.png',
         selectedIconPath: './imgs/icon_classification_HL.png',
+      },  {
+        pagePath: 'pages/test/index',
+        text: '测试',
+        iconPath: './imgs/icon_test.png',
+        selectedIconPath: './imgs/icon_test_HL.png',
       }, {
         pagePath: 'pages/graphic/index',
         text: '图文',

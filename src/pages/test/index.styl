@@ -1,0 +1,86 @@
+@keyframes showBg {
+  from {
+    background #fff
+  } to {
+    background #409eff
+  }
+}
+.swiper
+  width 100%
+  height 100vh
+  background #f8f8f8
+  .title
+    font-size 40rpx
+    font-weight bold
+    text-align center
+    margin-top 48rpx
+    .score
+      font-size 66rpx
+      color #409eff
+      margin-left 18rpx
+  .table
+    margin-top 48rpx
+    .table-item
+      display flex
+      .table-title
+        flex 1
+        text-align center
+        margin-bottom 28rpx
+        font-weight bold
+      .table-content
+        font-size 28rpx
+        flex 1
+        text-align center
+        margin-bottom 18rpx
+        &.correct
+          font-weight bold
+          color #409eff
+        &.error
+          color red
+  .btn-row
+    width 100%
+    display flex
+    justify-content center
+    position fixed
+    bottom 48rpx
+  .test-item
+    padding 30rpx
+    box-sizing border-box
+    .test-wrap
+      background #fff
+      padding 48rpx
+      padding-bottom 30rpx
+      border-radius 10rpx
+      .topic
+        font-size 36rpx
+      .count
+        margin-top 48rpx
+        text-align center
+      .options
+        margin-top 48rpx
+        .option
+          display flex
+          align-items center
+          justify-content center
+          background #fff
+          border 1rpx solid #999
+          width 300rpx
+          height 66rpx
+          border-radius @height
+          font-size 28rpx
+          color #333
+          margin-top 30rpx
+          &.checked
+            animation showBg .3s 
+            background #409eff
+            border 1rpx solid #409eff
+            color #fff
+          &.wrong
+            background red
+            border 1rpx solid red
+            color #fff
+          .logo
+            width 32rpx
+            height 32rpx
+            border-radius 4rpx
+            margin-right 18rpx

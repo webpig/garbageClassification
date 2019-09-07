@@ -5,7 +5,7 @@
 	"appid": "wxb060341354abcac8",
 	"setting": {
 		"urlCheck": true,
-		"es6": false,
+		"es6": true,
 		"postcss": false,
 		"minified": false,
 		"newFeature": true,
@@ -44,8 +44,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/camera/index",
-					"pathName": "pages/camera/index",
+					"name": "pages/test/index",
+					"pathName": "pages/test/index",
 					"query": "",
 					"scene": null
 				}

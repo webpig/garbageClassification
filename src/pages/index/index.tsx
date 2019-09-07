@@ -175,6 +175,7 @@ export default class Index extends Component {
       title: '超实用的垃圾分类工具(支持文字搜索、图像识别等功能)',
       path: '/pages/index/index',
       // imageUrl: 'https://s2.ax1x.com/2019/07/18/ZXmsKO.png'
+      imageUrl: 'http://tva1.sinaimg.cn/large/007X8olVly1g6re2i1ss8j30dw0dw74k.jpg'
     }
   }
 }

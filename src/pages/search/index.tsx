@@ -115,7 +115,7 @@ export default class Index extends Component {
           }
         </View>
         {
-          !this.state.garbageName && this.state.historyRecord.length > 0 ? 
+          !this.state.garbageName && this.state.historyRecord.length > 0 && this.state.hotRecord.length > 0 ? 
             <View className='history-header'>
               <Text>历史搜索</Text>
               <Image src={require('../../imgs/icon_clear_history.png')} className='icon-clear-history' onClick={this.clearHistoryRecord} />
