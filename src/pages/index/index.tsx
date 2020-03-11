@@ -17,9 +17,9 @@ export default class Index extends Component {
   }
 
   state = {
-    currTabName: 'recyclable',
-    statusBarHeight: 0,
-    navBarHeight: 0,
+    // currTabName: 'recyclable',
+    // statusBarHeight: 0,
+    // navBarHeight: 0,
     screenWidth: 0,
     menuButtonInfo: {} as {
       height: number,
@@ -67,7 +67,7 @@ export default class Index extends Component {
           <View className='input-box' onClick={this.jumpToSearchPage}>
             <Icon type='search' size='16' color='#999' className='icon-search'/>
             <Text className='placeholder'>请输入垃圾名称</Text>
-            <Image src='../../imgs/icon_camera_search.png' className='icon-camera' onClick={this.clickCameraIcon}></Image>
+            {/* <Image src='../../imgs/icon_camera_search.png' className='icon-camera' onClick={this.clickCameraIcon}></Image> */}
           </View>
         </View>
         {/* <Image src='https://s2.ax1x.com/2019/07/18/ZXViCV.jpg' className='banner' mode='widthFix' /> */}

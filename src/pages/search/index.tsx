@@ -86,12 +86,12 @@ export default class Index extends Component {
                 :
                 null
             }
-            { 
+            {/* { 
               !this.state.garbageName ?
                 <Image src='../../imgs/icon_camera_search.png' className='icon-camera' onClick={this.clickCameraIcon}></Image>
                 :
                 null
-            }
+            } */}
           </View>
           {/* {
             <View className='cancel-btn'>取消</View>

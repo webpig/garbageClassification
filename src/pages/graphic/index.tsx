@@ -36,6 +36,10 @@ export default class Index extends Component {
   }
 
   setImgHeight () {
+    Taro.showLoading({
+      title: '正在加载...'
+    })
+
     Taro
       .getImageInfo({
         src: 'https://tva1.sinaimg.cn/large/0060lm7Tly1g52p7mhyigj30m84blwm4.jpg',
@@ -44,7 +48,9 @@ export default class Index extends Component {
         this.setState({
           imgHeight: res.height * this.state.screenWidth / res.width
         })
+        Taro.hideLoading()
       })
+      .catch(e => Taro.hideLoading())
   }
 
   componentDidMount () { }
